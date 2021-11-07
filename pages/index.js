@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/Link';
 import styles from '../styles/Home.module.css'
-import data from '../data/data.json';
 
 export default function Home({users}) {
 
@@ -31,9 +30,11 @@ export default function Home({users}) {
   )
 }
 export async function getServerSideProps(ctx) {
+  const response = await fetch(`http://localhost:3000/api/users`);
+  const { users } = await response.json();
   return {
     props: {
-      users: data.users,
+      users,
     }
   }
 }

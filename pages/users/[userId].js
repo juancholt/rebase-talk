@@ -1,5 +1,4 @@
 import styles from './user.module.css';
-import data from '../../data/data.json';
 const UserPage = ({
   user
 }) => {
@@ -12,7 +11,8 @@ const UserPage = ({
 }
 
 export async function getServerSideProps(ctx) {
-  const currentUser = data.users.find(user => user.id === ctx.params.userId);
+  const response = await fetch(`http://localhost:3000/api/users/${ctx.params.userId}`);
+  const currentUser = await response.json();
   return {
     props: {
       user: currentUser,
