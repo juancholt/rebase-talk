@@ -1,0 +1,7 @@
+{
+    "products": [
+      { "id": "p1", "name": "House", "price": "300 CHEX" },
+      { "id": "p2", "name": "Car", "price": "30 CHEX" },
+      { "id": "p3", "name": "Boat", "price": "100 CHEX" }
+    ]
+  }
