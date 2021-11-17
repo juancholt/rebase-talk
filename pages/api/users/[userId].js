@@ -1,4 +1,4 @@
-import data from '../../../data/data.json';
+import data from '../../../data/user.json';
 
 export default function handler(req, res) {
   const currentUser = data.users.find(user => user.id === req.query.userId);

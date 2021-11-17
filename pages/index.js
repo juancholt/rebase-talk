@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/Link';
 import styles from '../styles/Home.module.css'
 
-export default function Home({users}) {
+export default function Home({users, tokens}) {
 
   return (
     <div className={styles.container}>
@@ -16,6 +16,7 @@ export default function Home({users}) {
         <h1 className={styles.title}>
           Hey I'm a rebase app
         </h1>
+        <h2>User List</h2>
         <section className={styles.grid}>
           {users.map(user => (
             <Link key={user.id} href={`/users/${user.id}`}>
@@ -25,16 +26,29 @@ export default function Home({users}) {
             </Link>
           ))}
         </section>
+        <h2>Token List</h2>
+        <section className={styles.grid}>
+          {tokens.map(token => (
+            <Link key={token.id} href={`/tokens/${token.id}`}>
+              <a className={styles.card}>
+                <h2>{token.name}</h2>
+              </a>
+            </Link>
+          ))}
+        </section>
       </main>
     </div>
   )
 }
 export async function getServerSideProps(ctx) {
-  const response = await fetch(`http://localhost:3000/api/users`);
-  const { users } = await response.json();
+  const userResponse = await fetch(`http://localhost:3000/api/users`);
+  const tokenResponse = await fetch(`http://localhost:3000/api/tokens`);
+  const { users } = await userResponse.json();
+  const { tokens } = await tokenResponse.json();
   return {
     props: {
       users,
+      tokens,
     }
   }
 }
